@@ -46,6 +46,27 @@
             <option value="{{ equip }}">{{equip}}</option>
             {% endfor %}
         </select>
+        <label class="año flex" for="año">AÑO</label>
+        <form action="{{ url_for('equips') }}" method="POST">
+            <div class="flex">
+                <select class="opciones" name="años" id="año">
+                    <option class="option value="-- Elije una opcion -->-- Elija un año --</option>
+                    <option class="option" value="" disabled>-----Primera Division-----</option>
+                    <option value="temporada12">Primera Division 2012-2013</option>
+                    <option value="temporada13">Primera Division 2013-2014</option>
+                    <option value="temporada14">Primera Division 2014-2015</option>
+                    <option value="temporada15">Primera Division 2015-2016</option>
+                    <option value="temporada16">Primera Division 2016-2017</option>
+                    <option value="temporada17">Primera Division 2017-2018</option>
+                    <option value="temporada18_1">Primera Division 2018-2019</option>
+                    <option value="temporada19_1">Primera Division 2019-2020</option>
+                    <!-- <option value="temporada20_1">Primera Division 2020-2021</option> -->
+                    <option class="option" value="" disabled>-----Segunda Division-----</option>
+                    <option value="temporada18_2">Segunda Division 2018-2019</option>
+                    <option value="temporada19_2">Segunda Division 2019-2020</option>
+                    <!-- <option value="temporada20_2">Segunda Division 2020-2021</option> -->
+                </select>
+            </div>
         <br><br><br><br><br><br><br>
         <div class="flex">
             <input class="btn" type="submit" value="Buscar" />

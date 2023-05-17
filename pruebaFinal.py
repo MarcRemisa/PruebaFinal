@@ -20,7 +20,7 @@ def index():
     data={
         'titulo':'Resultados',
         'titulo2':'Equipos',
-        'bienvenida':'Resultados Laliga Primera Division y Segunda Division Temporadas 2012-2013 hasta 2020-2021',
+        'bienvenida':'Resultados Laliga Primera Division y Segunda Division Temporadas 2012-2013 hasta 2019-2020',
     }
     return render_template('index.html',data=data)
 
@@ -29,12 +29,11 @@ def equips():
     if request.method == 'POST':
         temporada = request.form["años"]
         print(temporada)
-        equips = buscarEquiposTemporada(temporada)
-        # equips = ['Barcelona','Mallorca','Espanyol','Madrid']
+        equips = buscarEquiposTemporada(temporada)  
     data={
         'titulo':'Resultados',
         'titulo2':'Equipos',
-        'bienvenida':'Resultados Laliga Primera Division y Segunda Division Temporadas 2012-2013 hasta 2020-2021',
+        'bienvenida':'Resultados Laliga Primera Division y Segunda Division Temporadas 2012-2013 hasta 2019-2020',
     }
     return render_template('equips.html',data=data, equips=equips)
 
@@ -48,7 +47,7 @@ def resultados():
         # resultado = '1-0'
     data={
         'titulo':'Resultados',
-        'bienvenida':'Resultados Laliga Primera Division y Segunda Division Temporadas 2012-2013 hasta 2020-2021',
+        'bienvenida':'Resultados Laliga Primera Division y Segunda Division Temporadas 2012-2013 hasta 2019-2020',
         'resultado':'El resultado de los dos equipos es',
         'dia':'Se jugo el dia',
         'jornada':'La jornada que se jugo el partido fue'
@@ -70,14 +69,15 @@ def buscarEquiposTemporada(temporada):
     equipos_ordenados = sorted(list(equipos))
     return equipos_ordenados
 
+
 def resultadoEquipos():
     Team1 = request.form["Equipos1"]
     Team2 = request.form["Equipos2"]
-    # temporada = request.form["años"]
+    temporada = request.form["años"]
     # temporada = buscarEquiposTemporada(temporada)
     cursor = mybd.cursor()
-    cursor.execute(f"SELECT FT FROM temporada12 WHERE Team1 = '{Team1}' and Team2 = '{Team2}'")
-    resultado = cursor.fetchall()
+    cursor.execute(f"SELECT FT FROM {temporada} WHERE Team1 = '{Team1}' and Team2 = '{Team2}'")
+    resultado = cursor.fetchall()   
     resultado_final = resultado [0][0]
     cursor.close()
     return resultado_final
