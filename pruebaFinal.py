@@ -76,10 +76,11 @@ def resultadoEquipos():
     # temporada = request.form["años"]
     # temporada = buscarEquiposTemporada(temporada)
     cursor = mybd.cursor()
-    cursor.execute(f"SELECT Team1,FT,Team2 FROM temporada12 WHERE Team1 = '{Team1}' and Team2 = '{Team2}'")
+    cursor.execute(f"SELECT FT FROM temporada12 WHERE Team1 = '{Team1}' and Team2 = '{Team2}'")
     resultado = cursor.fetchall()
+    resultado_final = resultado [0][0]
     cursor.close()
-    return resultado
+    return resultado_final
 
 
 # Si nuestro archivo python se está ejecutando directamente ejecutamos la aplicación en modo de depuración con la función app.run(debug=True)
