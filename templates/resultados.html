@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ data.titulo }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/x-icon">
+</head>
+<body class="fondo">
+    <h1 class="portada flex" >{{ data.bienvenida }}</h1>
+    <h2 class="flex">{{ data.resultado }}</h2>
+    <h1 class="flex">{{ resultado }}</h1>
+    <!-- <h2 class="flex">{{ data.dia }}</h2>
+    <h2 class="flex">{{ data.jornada }}</h2> -->
+    <!-- <label class="año" for="año">Año:</label> -->
+    <!-- <select name="años" id="año">
+        <option value="-- Elije una opcion --">-- Elija un año --</option>
+        <option value="" disabled>-----Primera Division-----</option>
+        <option value="12-13">Primera Division 2012-2013</option>
+        <option value="13-14">Primera Division 2013-2014</option>
+        <option value="14-15">Primera Division 2014-2015</option>
+        <option value="15-16">Primera Division 2015-2016</option>
+        <option value="16-17">Primera Division 2016-2017</option>
+        <option value="17-18">Primera Division 2017-2018</option>
+        <option value="18-19">Primera Division 2018-2019</option>
+        <option value="19-20">Primera Division 2019-2020</option>
+        <option value="20-21">Primera Division 2020-2021</option>
+        <option value="" disabled>-----Segunda Division-----</option>
+        <option value="18-19">Segunda Division 2018-2019</option>
+        <option value="19-20">Segunda Division 2019-2020</option>
+        <option value="20-21">Segunda Division 2020-2021</option>
+
+    </select> -->
+    
+    <!-- <label class="Equipo1" for="Equipo 1">Equipo 1: </label>
+    <select name="Equipos" id="Equipo 1">
+        <option value="-- Elije una opcion --">-- Elija el equipo --</option>
+        {% for equip in equips %}
+        <option value="-- Elije una opcion --">{{equip}}</option>
+        {% endfor %}
+     </select>
+    <label class="Equipo2" for="Equipo 2">Equipo 2: </label>
+    <select name="Equipos" id="Equipo 2">
+        <option value="-- Elije una opcion --">-- Elija el equipo --</option>
+        {% for equip in equips %}
+        <option value="-- Elije una opcion --">{{equip}}</option>
+        {% endfor %}
+    </select>
+    <input class="btn" type="submit" value="Buscar" /> -->
+</body>
+</html>
