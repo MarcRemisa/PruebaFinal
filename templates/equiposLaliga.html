@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{data.tituloLA1}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Condensed&family=Teko:wght@300&display=swap" rel="stylesheet">
+</head>
+<body class="fondo-la">
+    <h1 class="portada-la flex">{{data.bienvenidaLA1}}</h1>
+    <br>
+    <form action="{{ url_for('resultadosLaliga')}}" method="POST">
+        <div class="flex">
+            <select class="opciones-la" name="años" id="año">
+                <option value=""> ELIJE TEMPORADA </option>
+                <option value="laliga2018"> Temporada 18</option>
+                <option value="laliga2019"> Temporada 19</option>
+                <option value="laliga2020"> Temporada 20</option>
+                <option value="laliga2021"> Temporada 21</option>
+                <option value="laliga2022"> Temporada 22</option>
+            </select>
+        </div>
+        <br><br><br><br>
+        <div class="flex">
+            <select class="opciones-la" name="Equipos1" id="Equipo 1">
+                <option value="">Elije el equipo Local</option>
+                {% for equipo in equipos %}
+                <option value="{{ equipo }}">{{equipo}}</option>
+                {% endfor %}
+            </select>
+            <select class="opciones-la" name="Equipos2" id="Equipo 2">
+                <option value="">Elije el equipo Visitiante</option>
+                {% for equipo in equipos %}
+                <option value="{{ equipo }}">{{equipo}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <br><br><br>
+        <div class="flex">
+            <input class="boton-la" type="submit" value="Buscar">
+        </div>
+    </form>
+</body>
+</html>

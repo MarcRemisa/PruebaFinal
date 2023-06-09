@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{data.tituloS1}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Condensed&family=Teko:wght@300&display=swap" rel="stylesheet">
+</head>
+<body class="fondo-s">
+    <h1 class="portada-s flex">{{data.bienvenidaS1}}</h1>
+    <br>
+    <form action="{{ url_for('resultadosSerieA')}}" method="POST">
+        <div class="flex">
+            <select class="opciones-s" name="años" id="año">
+                <option value=""> ELIJE TEMPORADA </option>
+                <option value="seriea2017"> Temporada 17</option>
+                <option value="seriea2018"> Temporada 18</option>
+                <option value="seriea2019"> Temporada 19</option>
+                <option value="seriea2020"> Temporada 20</option>
+                <option value="seriea2021"> Temporada 21</option>
+                <option value="seriea2022"> Temporada 22</option>
+            </select>
+        </div>
+        <br><br><br><br>
+        <div class="flex">
+            <select class="opciones-s" name="Equipos1" id="Equipo 1">
+                <option value="">Elije el equipo Local</option>
+                {% for equipo in equipos %}
+                <option value="{{ equipo }}">{{equipo}}</option>
+                {% endfor %}
+            </select>
+            <select class="opciones-s" name="Equipos2" id="Equipo 2">
+                <option value="">Elije el equipo Visitiante</option>
+                {% for equipo in equipos %}
+                <option value="{{ equipo }}">{{equipo}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <br><br><br>
+        <div class="flex">
+            <input class="boton-s" type="submit" value="Buscar">
+        </div>
+    </form>
+</body>
+</html>

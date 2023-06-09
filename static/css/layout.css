@@ -1,55 +1,165 @@
 .fondo{
-    background-color: cyan;
-    margin: 0%  
+    background-color: black;
+    margin: 0%;
 }
 
 .fondo2{
-    background-color: cyan;
-    margin: 0%  
+  background-color: black;
+  margin: 0%;
+}
+
+.fondo-bun{
+    background-image: url(/static/bundesliga-728.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0%;
+    background-position: center top 50px;
+}
+
+.fondo-la{
+    background-image: url(/static/f.elconfidencial.com_original_69f_488_648_69f4886486dea783426e71c747c40bd8.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0%;
+    background-position: center top 50px;
+}
+
+.fondo-li{
+    background-image: url(/static/canal-ligue-1-728.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0%;
+    background-position: center top 50px;
+}
+
+.fondo-p{
+    background-image: url(/static/descargar.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0%;
+    background-position: center top 50px;
+}
+
+.fondo-s{
+    background-image: url(/static/16532478424128.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0%;
+    background-position: center top 50px;
+}
+
+.fondo-ch{
+    background-image: url(/static/Fulham\ Championship\ playoff\ winners\ 2020\ promotion.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0%;
+    background-position: center top 50px;
+}
+
+.fondo-nb{
+    background-image: url(/static/GettyImages-1175663328.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0%;
+    background-position: center top 50px;
+}
+
+.fondo-nf{
+    background-image: url(/static/nfl-728.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0%;
+    background-position: center top 50px;
 }
 
 .portada{
-    color: rgb(0, 0, 0);
+    color: black;
     text-align: center;
     margin: 0%;
     height: 100px;
-    /* background-color: red; */
-    animation-name: example;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
     border-style: solid;
-    /* background: linear-gradient(30deg,rgb(52, 255, 2),rgb(0, 208, 255)); */
-}
-@keyframes example {
-    0% {background-color:  rgb(0, 208, 255);}
-    50% {background-color: rgb(52, 255, 2);}
-    100% {background-color: rgb(0, 208, 255);}
-  }
-
-.div{
-    display: flex;
+    background-color: aliceblue;
+    font-family: 'Permanent Marker', cursive;
 }
 
-.año{
+.portada-bun{
+    color: white;
     text-align: center;
-    color: white;
-    text-shadow: 2px 2px 2px #fff, -2px -2px 2px #fff, 2px -2px 2px #fff, -2px 2px 2px #fff;
-    font-size: 50px;
-    font-family: Arial, sans-serif;
+    margin: 0%;
+    height: 100px;
+    border-style: solid;
+    background-color: rgb(255, 0, 0);
+    font-family: 'Permanent Marker', cursive;
 }
 
-.Equipo1{
+.portada-la{
+    color: rgb(255, 255, 255);
     text-align: center;
-    color: white;
-    text-shadow: 2px 2px 4px #000000;
-    font-size: 50px;
+    margin: 0%;
+    height: 100px;
+    border-style: solid;
+    background-color: black;
+    font-family: 'Permanent Marker', cursive;
 }
 
-.Equipo2{
-    text-align: right;
-    color: white;
-    text-shadow: 2px 2px 4px #000000;
-    font-size: 50px;
+.portada-li{
+    color: rgb(43, 255, 0);
+    text-align: center;
+    margin: 0%;
+    height: 100px;
+    border-style: solid;
+    background-color: rgb(4, 0, 53);
+    font-family: 'Permanent Marker', cursive;
+}
+
+.portada-p{
+    color: rgb(46, 0, 107);
+    text-align: center;
+    margin: 0%;
+    height: 100px;
+    border-style: solid;
+    background-color: rgb(6, 226, 255);
+    font-family: 'Permanent Marker', cursive;
+}
+
+.portada-s{
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin: 0%;
+    height: 100px;
+    border-style: solid;
+    background-color: rgb(2, 32, 202);
+    font-family: 'Permanent Marker', cursive;
+}
+
+.portada-ch{
+    color: rgb(177, 144, 1);
+    text-align: center;
+    margin: 0%;
+    height: 100px;
+    border-style: solid;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Permanent Marker', cursive;
+}
+
+.portada-nb{
+    color: rgb(1, 63, 177);
+    text-align: center;
+    margin: 0%;
+    height: 100px;
+    border-style: solid;
+    background-color: black;
+    font-family: 'Permanent Marker', cursive;
+}
+
+.portada-nf{
+    color: rgb(158, 0, 0);
+    text-align: center;
+    margin: 0%;
+    height: 100px;
+    border-style: solid;
+    background-color: rgb(1, 63, 177);
+    font-family: 'Permanent Marker', cursive;
 }
 
 .flex{
@@ -58,44 +168,397 @@
     justify-content: center;
 }
 
-.btn {
-    background-color: black;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 20px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.div1{
-    text-align: center;
-}
-
-.opciones {
-    background-color: rgb(0, 255, 0);
-    color: black;
-    border: none;
-    padding: 10px 20px;
-    font-size: 15px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.option{
-    text-align: center;
-}
-
-.row{
+.button-container {
     display: flex;
     flex-wrap: wrap;
-    margin: -10px;
+    justify-content: center;
+    align-items: center;
+    padding-top: 150px;
+  }
+  
+  .button1 {
+    margin: 50px;
+    padding: 10px 20px;
+    /* border: none; */
+    border-radius: 5px;
+    font-size: 40px;
+    color: white;
+    /* background-image: url(/static/bundesliga-728.jpg); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 15%;
+    height: 15%;
+    background-color: red;
+    border-color: white;
+  }
+  .button1:hover {
+    background-color: white;
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10px white;
+    color: red;
+  }
+
+  .button2 {
+    margin: 50px;
+    padding: 10px 20px;
+    /* border: none; */
+    border-radius: 5px;
+    font-size: 40px;
+    color: white;
+    /* background-image: url(/static/f.elconfidencial.com_original_69f_488_648_69f4886486dea783426e71c747c40bd8.jpg); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 15%;
+    height: 15%;
+    background-color: black;
+    border-color: white;
+  }
+  .button2:hover {
+    background-color: white;
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10px white;
+    color: black;
+  }
+  .button3 {
+    margin: 50px;
+    padding: 10px 20px;
+    /* border: none; */
+    border-radius: 5px;
+    font-size: 40px;
+    color: rgb(43, 255, 0);
+    /* background-image: url(/static/canal-ligue-1-728.jpg); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 15%;
+    height: 15%;
+    background-color: rgb(4, 0, 53);
+    border-color: rgb(43, 255, 0);
+  }
+  .button3:hover {
+    background-color: rgb(43, 255, 0);
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10px rgb(43, 255, 0);
+    color: rgb(4, 0, 53);
+  }
+  .button4 {
+    margin: 50px;
+    padding: 10px 20px;
+    /* border: none; */
+    border-radius: 5px;
+    font-size: 40px;
+    color: rgb(46, 0, 107);
+    /* background-image: url(/static/descargar.jpg); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 15%;
+    height: 15%;
+    background-color: rgb(6, 226, 255);
+    border-color: rgb(46, 0, 107);
+  }
+  .button4:hover {
+    background-color: rgb(46, 0, 107);
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10px rgb(46, 0, 107);
+    color: rgb(6, 226, 255);
+  }
+  .button5 {
+    margin: 50px;
+    padding: 10px 20px;
+    /* border: none; */
+    border-radius: 5px;
+    font-size: 40px;
+    color: white;
+    /* background-image: url(/static/16532478424128.jpg); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 15%;
+    height: 15%;
+    background-color: rgb(2, 32, 202);
+    border-color: white;
+  }
+  .button5:hover {
+    background-color: white;
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10px white;
+    color: rgb(2, 32, 202);
+  }
+  .button6 {
+    margin: 50px;
+    padding: 10px 20px;
+    /* border: none; */
+    border-radius: 5px;
+    font-size: 40px;
+    color: rgb(177, 144, 1);
+    /* background-image: url(/static/Fulham\ Championship\ playoff\ winners\ 2020\ promotion.jpg); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 15,5%;
+    height: 15%;
+    background-color: white;
+    border-color: rgb(177, 144, 1);
+  }
+  .button6:hover {
+    background-color: rgb(177, 144, 1);
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10px rgb(177, 144, 1);
+    color: white;
+  }
+  .button7 {
+    margin: 50px;
+    padding: 10px 20px;
+    /* border: none; */
+    border-radius: 5px;
+    font-size: 40px;
+    color: rgb(1, 63, 177);
+    /* background-image: url(/static/GettyImages-1175663328.jpg); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 15%;
+    height: 15%;
+    background-color: black;
+    border-color: rgb(1, 63, 177);
+  }
+  .button7:hover {
+    background-color: rgb(1, 63, 177);
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10px rgb(1, 63, 177);
+    color: red;
+  }
+  .button8 {
+    margin: 50px;
+    padding: 10px 20px;
+    /* border: none; */
+    border-radius: 5px;
+    font-size: 40px;
+    color: rgb(158, 0, 0);
+    /* background-image: url(/static/nfl-728.jpg); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 15%;
+    height: 15%;
+    background-color: rgb(1, 63, 177);
+    border-color: rgb(158, 0, 0);
+  }
+  .button8:hover {
+    background-color: rgb(158, 0, 0);
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10px rgb(158, 0, 0);
+    color: rgb(1, 63, 177);
+  }
+
+.formu{
+  padding-top: 250px;
 }
 
-.column2{
-    width: 50%;
-    float: left;
-    padding-left: 20%;
-    padding-right: 5%;
-    padding-top: 120px;
+
+.opciones-bu{
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 25px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.boton-bu{
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.color-bun{
+  color: red;
+  font-size: 50px;
+}
+
+.opciones-la{
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 25px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.boton-la{
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.color-la{
+  color: white;
+  font-size: 50px;
+}
+
+.opciones-li{
+  background-color: rgb(4, 0, 53);
+  color: rgb(43, 255, 0);
+  border: none;
+  padding: 10px 20px;
+  font-size: 25px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.boton-li{
+  background-color: rgb(4, 0, 53);
+  color: rgb(43, 255, 0);
+  border: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.color-li{
+  color: rgb(43, 255, 0);
+  font-size: 50px;
+}
+
+.opciones-p{
+  background-color: rgb(6, 226, 255);
+  color: rgb(46, 0, 107);
+  border: none;
+  padding: 10px 20px;
+  font-size: 25px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.boton-p{
+  background-color: rgb(6, 226, 255);
+  color: rgb(46, 0, 107);
+  border: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.color-p{
+  color: rgb(46, 0, 107);
+  font-size: 50px;
+}
+
+.opciones-s{
+  background-color: rgb(2, 32, 202);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 25px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.boton-s{
+  background-color: rgb(2, 32, 202);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.color-s{
+  color: white;
+  font-size: 50px;
+}
+
+.opciones-ch{
+  background-color: white;
+  color: rgb(177, 144, 1);
+  border: none;
+  padding: 10px 20px;
+  font-size: 25px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.boton-ch{
+  background-color: white;
+  color: rgb(177, 144, 1);
+  border: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.color-ch{
+  color: rgb(177, 144, 1);
+  font-size: 50px;
+}
+
+.opciones-nb{
+  background-color: black;
+  color: rgb(1, 63, 177);
+  border: none;
+  padding: 10px 20px;
+  font-size: 25px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.boton-nb{
+  background-color: black;
+  color: rgb(1, 63, 177);
+  border: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.color-nb{
+  color: rgb(1, 63, 177);
+  font-size: 50px;
+}
+
+.opciones-nf{
+  background-color: rgb(1, 63, 177);
+  color: rgb(158, 0, 0);
+  border: none;
+  padding: 10px 20px;
+  font-size: 25px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.boton-nf{
+  background-color: rgb(1, 63, 177);
+  color: rgb(158, 0, 0);
+  border: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.color-nf{
+  color: rgb(158, 0, 0);
+  font-size: 50px;
+}
+
+.color-ultimo{
+  color: white
 }
