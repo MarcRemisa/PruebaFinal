@@ -1,89 +1,682 @@
-# Importamos la clase Flask de la librería Flask y la de panadas.
 from flask import Flask, render_template, request
-import pandas as pd
-import mysql.connector as mysqlcn
 import csv
-import os
+import mysql.connector as mysqlcn
 
-# Creamos una instancia de la clase Flask y la almacenamos en la variable app
 app = Flask(__name__)
 
-
-# Nos connectamos a nuestro servidor MYSQL
-mybd = mysqlcn.connect(user='root',password='marcremisa10',
-                                host='127.0.0.1',
-                                database='resultados')
-
-# Usamos la función @app.route('/') para indicar que queremos que la función index se ejecute cuando se visite la página principal (/)
 @app.route('/')
 def index():
     data={
         'titulo':'Resultados',
-        'titulo2':'Equipos',
-        'bienvenida':'Resultados Laliga Primera Division y Segunda Division Temporadas 2012-2013 hasta 2019-2020',
+        'bienvenida':'RESULTADOS DIFERENTES DEPORTES',
     }
     return render_template('index.html',data=data)
 
-@app.route('/equips', methods=['GET','POST'])
-def equips():
-    if request.method == 'POST':
+@app.route('/bundesliga')
+def bundesliga():
+    data = {
+        'tituloB': 'Bundesliga',
+        'bienvenidaB': 'TEMPORADAS BUNDESLIGA'
+    }
+    return render_template('bundesliga.html', data=data)
+
+@app.route('/bundesliga/equiposBundesliga', methods=['GET','POST'])
+def equiposBundesliga():
+    if request.method== 'POST':
         temporada = request.form["años"]
         print(temporada)
-        equips = buscarEquiposTemporada(temporada)  
-    data={
-        'titulo':'Resultados',
-        'titulo2':'Equipos',
-        'bienvenida':'Resultados Laliga Primera Division y Segunda Division Temporadas 2012-2013 hasta 2019-2020',
+        equipos = buscarEquiposBundesliga(temporada)
+    data = {
+        'tituloB1': 'Bundesliga',
+        'bienvenidaB1': 'EQUIPOS BUNDESLIGA'
     }
-    return render_template('equips.html',data=data, equips=equips)
+    return render_template('equiposBundesliga.html', data=data, equipos=equipos)
 
-
-@app.route('/resultados', methods=['GET','POST'])
-def resultados():
-    if request.method == 'POST':
-        # resultadoTemporada = request.form["Equipos"]
-        # print(resultadoTemporada)
-        resultado = resultadoEquipos()
-        # resultado = '1-0'
-    data={
-        'titulo':'Resultados',
-        'bienvenida':'Resultados Laliga Primera Division y Segunda Division Temporadas 2012-2013 hasta 2019-2020',
-        'resultado':'El resultado de los dos equipos es',
-        'dia':'Se jugo el dia',
-        'jornada':'La jornada que se jugo el partido fue'
+@app.route('/bundesliga/equiposBundesliga/resultadosBundesliga', methods=['GET','POST'])
+def resultadosBundesliga():
+    if request.method== 'POST':
+        resultado = resultadoEquiposBundesliga()
+        estadio = EstadioEquiposBundesliga()
+        dia = DiaEquiposBundesliga()
+    data = {
+        'tituloB2': 'Bundesliga',
+        'bienvenidaB2': 'RESULTADOS BUNDESLIGA'
     }
-    return render_template('resultados.html',data=data,resultado=resultado)
+    return render_template('resultadosBundesliga.html', data=data, resultado=resultado, estadio=estadio, dia=dia)
 
-def buscarEquiposTemporada(temporada):
-    # Esta función buscará el csv de la temporada y devolverá una lista ordenada alfabéticamente con los nombres de los equipos
-    fichero = open(f"espana-master/{temporada}.csv", 'r', encoding="utf-8")
-    # Lee la primera línea del csv y la omitimos
+@app.route('/laliga')
+def laliga():
+    data={
+        'tituloLA':'La Liga',
+        'bienvenidaLA':'TEMPORADAS LA LIGA'
+    }
+    return render_template('laliga.html',data=data)
+
+@app.route('/laliga/equiposLaliga', methods=['GET','POST'])
+def equiposLaliga():
+    if request.method== 'POST':
+        temporada = request.form["años"]
+        print(temporada)
+        equipos = buscarEquiposLaliga(temporada)
+    data = {
+        'tituloLA1': 'Laliga',
+        'bienvenidaLA1': 'EQUIPOS LA LIGA'
+    }
+    return render_template('equiposLaliga.html', data=data, equipos=equipos)
+
+@app.route('/laliga/equiposLaliga/resultadosLaliga', methods=['GET','POST'])
+def resultadosLaliga():
+    if request.method== 'POST':
+        resultado = resultadoEquiposLaliga()
+        estadio = EstadioEquiposLaliga()
+        dia = DiaEquiposLaliga()
+    data = {
+        'tituloLA2': 'Laliga',
+        'bienvenidaLA2': 'RESULTADOS LALIGA'
+    }
+    return render_template('resultadosLaliga.html', data=data, resultado=resultado, estadio=estadio, dia=dia)
+
+@app.route('/ligue1')
+def ligue1():
+    data={
+        'tituloLI':'Ligue 1',
+        'bienvenidaLI':'TEMPORADAS LIGUE1'
+    }
+    return render_template('ligue1.html',data=data)
+
+@app.route('/ligue1/equiposLigue1', methods=['GET','POST'])
+def equiposLigue1():
+    if request.method== 'POST':
+        temporada = request.form["años"]
+        print(temporada)
+        equipos = buscarEquiposLigue1(temporada)
+    data = {
+        'tituloLI1': 'Ligue 1',
+        'bienvenidaLI1': 'EQUIPOS LIGUE1'
+    }
+    return render_template('equiposLigue1.html', data=data, equipos=equipos)
+
+@app.route('/ligue1/equiposLigue1/resultadosLigue1', methods=['GET','POST'])
+def resultadosLigue1():
+    if request.method== 'POST':
+        resultado = resultadoEquiposLigue1()
+        estadio = EstadioEquiposLigue1()
+        dia = DiaEquiposLigue1()
+    data = {
+        'tituloLI2': 'Ligue 1',
+        'bienvenidaLI2': 'RESULTADOS LIGUE1'
+    }
+    return render_template('resultadosLigue1.html', data=data, resultado=resultado, estadio=estadio, dia=dia)
+
+@app.route('/premierLeague')
+def premierLeague():
+    data={
+        'tituloP':'Premier League',
+        'bienvenidaP':'TEMPORADAS PREMIER LEAGUE'
+    }
+    return render_template('premier.html',data=data)
+
+@app.route('/premierLeague/equiposPremierLeague', methods=['GET','POST'])
+def equiposPremierLeague():
+    if request.method== 'POST':
+        temporada = request.form["años"]
+        print(temporada)
+        equipos = buscarEquiposPremierLeague(temporada)
+    data = {
+        'tituloP1': 'Premier League',
+        'bienvenidaP1': 'EQUIPOS PREMIER LEAGUE'
+    }
+    return render_template('equiposPremierLeague.html', data=data, equipos=equipos)
+
+@app.route('/premierLeague/equiposPremierLeague/resultadosPremierLeague', methods=['GET','POST'])
+def resultadosPremierLeague():
+    if request.method== 'POST':
+            resultado = resultadoEquiposPremier()
+            estadio = EstadioEquiposPremier()
+            dia = DiaEquiposPremier()
+    data = {
+        'tituloP2': 'Premier League',
+        'bienvenidaP2': 'RESULTADOS PREMIER LEAGUE'
+    }
+    return render_template('resultadosPremierLeague.html', data=data, resultado=resultado, estadio=estadio, dia=dia)
+
+@app.route('/seriea')
+def seriea():
+    data={
+        'tituloS':'Serie A',
+        'bienvenidaS':'TEMPORADAS SERIE A'
+    }
+    return render_template('seriea.html',data=data)
+
+@app.route('/seriea/equiposSerieA', methods=['GET','POST'])
+def equiposSerieA():
+    if request.method== 'POST':
+        temporada = request.form["años"]
+        print(temporada)
+        equipos = buscarEquiposSerieA(temporada)
+    data = {
+        'tituloS1': 'Serie A',
+        'bienvenidaS1': 'EQUIPOS SERIE A'
+    }
+    return render_template('equiposSerieA.html', data=data, equipos=equipos)
+
+@app.route('/seriea/equiposSerieA/resultadosSerieA', methods=['GET','POST'])
+def resultadosSerieA():
+    if request.method== 'POST':
+        resultado = resultadoEquiposSerieA()
+        estadio = EstadioEquiposSerieA()
+        dia = DiaEquiposSerieA()
+    data = {
+        'tituloS2': 'Serie A',
+        'bienvenidaS2': 'RESULTADOS SERIE A'
+    }
+    return render_template('resultadosSerieA.html', data=data, resultado=resultado, estadio=estadio, dia=dia)
+
+@app.route('/championship')
+def championship():
+    data={
+        'tituloCH':'Championship',
+        'bienvenidaCH':'TEMPORADAS CHAMPIONSHIP'
+    }
+    return render_template('championship.html',data=data)
+
+@app.route('/championship/equiposChampionship', methods=['GET','POST'])
+def equiposChampionship():
+    if request.method== 'POST':
+        temporada = request.form["años"]
+        print(temporada)
+        equipos = buscarEquiposChampionship(temporada)
+    data = {
+        'tituloCH1': 'Championship',
+        'bienvenidaCH1': 'EQUIPOS CHAMPIONSHIP'
+    }
+    return render_template('equiposChampionship.html', data=data, equipos=equipos)
+
+@app.route('/championship/equiposChampionship/resultadosChampionship', methods=['GET','POST'])
+def resultadosChampionship():
+    if request.method== 'POST':
+        resultado = resultadoEquiposChampionship()
+        estadio = EstadioEquiposChampionship()
+        dia = DiaEquiposChampionship()
+    data = {
+        'tituloCH2': 'Championship',
+        'bienvenidaCH2': 'RESULTADOS CHAMPIONSHIP'
+    }
+    return render_template('resultadosChampionship.html', data=data, resultado=resultado, estadio=estadio, dia=dia)
+
+@app.route('/nba')
+def nba():
+    data={
+        'tituloNB':'NBA',
+        'bienvenidaNB':'TEMPORADAS NBA'
+    }
+    return render_template('nba.html',data=data)
+
+@app.route('/nba/equiposNBA', methods=['GET','POST'])
+def equiposNBA():
+    if request.method== 'POST':
+        temporada = request.form["años"]
+        print(temporada)
+        equipos = buscarEquiposNBA(temporada)
+    data = {
+        'tituloNB1': 'NBA',
+        'bienvenidaNB1': 'EQUIPOS NBA'
+    }
+    return render_template('equiposNBA.html', data=data, equipos=equipos)
+
+@app.route('/nba/equiposNBA/resultadosNBA', methods=['GET','POST'])
+def resultadosNBA():
+    if request.method== 'POST':
+        resultado = resultadoEquiposNBA()
+        estadio = EstadioEquiposNBA()
+        dia = DiaEquiposNBA()
+    data = {
+        'tituloNB2': 'NBA',
+        'bienvenidaNB2': 'RESULTADOS NBA'
+    }
+    return render_template('resultadosNBA.html', data=data, resultado=resultado, estadio=estadio, dia=dia)
+
+@app.route('/nfl')
+def nfl():
+    data={
+        'tituloNF':'NFL',
+        'bienvenidaNF':'TEMPORADAS NFL'
+    }
+    return render_template('nfl.html',data=data)
+
+@app.route('/nfl/equiposNFL', methods=['GET','POST'])
+def equiposNFL():
+    if request.method== 'POST':
+        temporada = request.form["años"]
+        print(temporada)
+        equipos = buscarEquiposNFL(temporada)
+    data = {
+        'tituloNF1': 'NFL',
+        'bienvenidaNF1': 'EQUIPOS NFL'
+    }
+    return render_template('equiposNFL.html', data=data, equipos=equipos)
+
+@app.route('/nfl/equiposNFL/resultadosNFL', methods=['GET','POST'])
+def resultadosNFL():
+    if request.method== 'POST':
+        resultado = '1-0'
+    data = {
+        'tituloNF2': 'NFL',
+        'bienvenidaNF2': 'RESULTADOS NFL'
+    }
+    return render_template('resultadosNFL.html', data=data, resultado=resultado)
+
+def buscarEquiposBundesliga(temporada):
+    fichero = open(f"Deportes/Bundesliga/{temporada}.csv", "r", encoding="utf-8")
     fichero.readline()
-    # Lee las líneas restantes y almacena los nombres de los equipos en un conjunto
     equipos = set()
     for linea in fichero:
         datos_equipo = linea.strip().split(",")
-        nombre_equipo = datos_equipo[2]
+        nombre_equipo = datos_equipo[5]
         equipos.add(nombre_equipo)
     fichero.close()
     equipos_ordenados = sorted(list(equipos))
     return equipos_ordenados
 
+def buscarEquiposLaliga(temporada):
+    fichero = open(f"Deportes/Laliga/{temporada}.csv", "r", encoding="utf-8")
+    fichero.readline()
+    equipos = set()
+    for linea in fichero:
+        datos_equipo = linea.strip().split(",")
+        nombre_equipo = datos_equipo[5]
+        equipos.add(nombre_equipo)
+    fichero.close()
+    equipos_ordenados = sorted(list(equipos))
+    return equipos_ordenados
 
-def resultadoEquipos():
-    Team1 = request.form["Equipos1"]
-    Team2 = request.form["Equipos2"]
+def buscarEquiposLigue1(temporada):
+    fichero = open(f"Deportes/Ligue1/{temporada}.csv", "r", encoding="utf-8")
+    fichero.readline()
+    equipos = set()
+    for linea in fichero:
+        datos_equipo = linea.strip().split(",")
+        nombre_equipo = datos_equipo[5]
+        equipos.add(nombre_equipo)
+    fichero.close()
+    equipos_ordenados = sorted(list(equipos))
+    return equipos_ordenados
+
+def buscarEquiposPremierLeague(temporada):
+    fichero = open(f"Deportes/PremierLeague/{temporada}.csv", "r", encoding="utf-8")
+    fichero.readline()
+    equipos = set()
+    for linea in fichero:
+        datos_equipo = linea.strip().split(",")
+        nombre_equipo = datos_equipo[5]
+        equipos.add(nombre_equipo)
+    fichero.close()
+    equipos_ordenados = sorted(list(equipos))
+    return equipos_ordenados
+
+def buscarEquiposSerieA(temporada):
+    fichero = open(f"Deportes/SerieA/{temporada}.csv", "r", encoding="utf-8")
+    fichero.readline()
+    equipos = set()
+    for linea in fichero:
+        datos_equipo = linea.strip().split(",")
+        nombre_equipo = datos_equipo[5]
+        equipos.add(nombre_equipo)
+    fichero.close()
+    equipos_ordenados = sorted(list(equipos))
+    return equipos_ordenados
+
+def buscarEquiposChampionship(temporada):
+    fichero = open(f"Deportes/SegundaDivisionInglaterra/{temporada}.csv", "r", encoding="utf-8")
+    fichero.readline()
+    equipos = set()
+    for linea in fichero:
+        datos_equipo = linea.strip().split(",")
+        nombre_equipo = datos_equipo[5]
+        equipos.add(nombre_equipo)
+    fichero.close()
+    equipos_ordenados = sorted(list(equipos))
+    return equipos_ordenados
+
+def buscarEquiposNBA(temporada):
+    fichero = open(f"Deportes/NBA/{temporada}.csv", "r", encoding="utf-8")
+    fichero.readline()
+    equipos = set()
+    for linea in fichero:
+        datos_equipo = linea.strip().split(",")
+        nombre_equipo = datos_equipo[5]
+        equipos.add(nombre_equipo)
+    fichero.close()
+    equipos_ordenados = sorted(list(equipos))
+    return equipos_ordenados
+
+def buscarEquiposNFL(temporada):
+    fichero = open(f"Deportes/NFL/{temporada}.csv", "r", encoding="utf-8")
+    fichero.readline()
+    equipos = set()
+    for linea in fichero:
+        datos_equipo = linea.strip().split(",")
+        nombre_equipo = datos_equipo[5]
+        equipos.add(nombre_equipo)
+    fichero.close()
+    equipos_ordenados = sorted(list(equipos))
+    return equipos_ordenados
+
+def resultadoEquiposBundesliga():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='bundesliga')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
     temporada = request.form["años"]
     # temporada = buscarEquiposTemporada(temporada)
     cursor = mybd.cursor()
-    cursor.execute(f"SELECT FT FROM {temporada} WHERE Team1 = '{Team1}' and Team2 = '{Team2}'")
+    cursor.execute(f"SELECT Result FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def EstadioEquiposBundesliga():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='bundesliga')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Location FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
     resultado = cursor.fetchall()   
     resultado_final = resultado [0][0]
     cursor.close()
     return resultado_final
 
+def DiaEquiposBundesliga():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='bundesliga')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Date FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()   
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
 
-# Si nuestro archivo python se está ejecutando directamente ejecutamos la aplicación en modo de depuración con la función app.run(debug=True)
-if __name__=='__main__':
+def resultadoEquiposLaliga():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='laliga')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Result FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def EstadioEquiposLaliga():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='laliga')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Location FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()   
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def DiaEquiposLaliga():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='laliga')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Date FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()   
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def resultadoEquiposLigue1():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='ligue1')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Result FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def EstadioEquiposLigue1():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='ligue1')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Location FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()   
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def DiaEquiposLigue1():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='ligue1')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Date FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()   
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def resultadoEquiposPremier():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='premierleague')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Result FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def EstadioEquiposPremier():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='premierleague')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Location FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()   
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def DiaEquiposPremier():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='premierleague')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Date FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()   
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def resultadoEquiposSerieA():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='seriea')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Result FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def EstadioEquiposSerieA():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='seriea')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Location FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()   
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def DiaEquiposSerieA():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='seriea')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Date FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()   
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def resultadoEquiposChampionship():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='championship')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Result FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def EstadioEquiposChampionship():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='championship')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Location FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()   
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def DiaEquiposChampionship():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='championship')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Date FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()   
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def resultadoEquiposNBA():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='nba')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Result FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def EstadioEquiposNBA():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='nba')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Location FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()   
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def DiaEquiposNBA():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='nba')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Date FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()   
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+if __name__ == '__main__':
     app.run(debug=True,port=5000)
 
