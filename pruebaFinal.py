@@ -259,12 +259,14 @@ def equiposNFL():
 @app.route('/nfl/equiposNFL/resultadosNFL', methods=['GET','POST'])
 def resultadosNFL():
     if request.method== 'POST':
-        resultado = '1-0'
+        resultado = resultadoEquiposNFL()
+        estadio = EstadioEquiposNFL()
+        dia = DiaEquiposNFL()
     data = {
         'tituloNF2': 'NFL',
         'bienvenidaNF2': 'RESULTADOS NFL'
     }
-    return render_template('resultadosNFL.html', data=data, resultado=resultado)
+    return render_template('resultadosNFL.html', data=data, resultado=resultado, estadio=estadio, dia=dia)
 
 def buscarEquiposBundesliga(temporada):
     fichero = open(f"Deportes/Bundesliga/{temporada}.csv", "r", encoding="utf-8")
@@ -666,6 +668,51 @@ def DiaEquiposNBA():
     mybd = mysqlcn.connect(user='root',password='marcremisa10',
                                 host='127.0.0.1',
                                 database='nba')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Date FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()   
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def resultadoEquiposNFL():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='nfl')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Result FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def EstadioEquiposNFL():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='nfl')
+    HomeTeam = request.form["Equipos1"]
+    AwayTeam = request.form["Equipos2"]
+    temporada = request.form["años"]
+    # temporada = buscarEquiposTemporada(temporada)
+    cursor = mybd.cursor()
+    cursor.execute(f"SELECT Location FROM {temporada} WHERE HomeTeam = '{HomeTeam}' and AwayTeam = '{AwayTeam}'")
+    resultado = cursor.fetchall()   
+    resultado_final = resultado [0][0]
+    cursor.close()
+    return resultado_final
+
+def DiaEquiposNFL():
+    mybd = mysqlcn.connect(user='root',password='marcremisa10',
+                                host='127.0.0.1',
+                                database='nfl')
     HomeTeam = request.form["Equipos1"]
     AwayTeam = request.form["Equipos2"]
     temporada = request.form["años"]

@@ -14,7 +14,7 @@
     <h1 class="portada-li flex">{{data.bienvenidaLI1}}</h1>
     <br>
     <form action="{{ url_for('resultadosLigue1')}}" method="POST">
-        <div class="flex">
+        <!-- <div class="flex">
             <select class="opciones-li" name="años" id="año">
                 <option value=""> ELIJE TEMPORADA </option>
                 <option value="ligue1_2018"> Temporada 18</option>
@@ -23,7 +23,7 @@
                 <option value="ligue1_2021"> Temporada 21</option>
                 <option value="ligue1_2022"> Temporada 22</option>
             </select>
-        </div>
+        </div> -->
         <br><br><br><br>
         <div class="flex">
             <select class="opciones-li" name="Equipos1" id="Equipo 1">
@@ -39,6 +39,7 @@
                 {% endfor %}
             </select>
         </div>
+        <input type="hidden" name="años" value="{{ request.form.get('años') }}">
         <br><br><br>
         <div class="flex">
             <input class="boton-li" type="submit" value="Buscar">

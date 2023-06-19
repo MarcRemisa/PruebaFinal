@@ -14,6 +14,19 @@
     <h1 class="portada-nf flex">{{data.bienvenidaNF1}}</h1>
     <br>
     <form action="{{ url_for('resultadosNFL')}}" method="POST">
+        <!-- <div class="flex">
+            <select class="opciones-nf" name="años" id="año">
+                <option value=""> ELIJE TEMPORADA </option>   
+                <option value="nfl2016"> Temporada 16</option>
+                <option value="nfl2017"> Temporada 17</option>    
+                <option value="nfl2018"> Temporada 18</option>
+                <option value="nfl2019"> Temporada 19</option>
+                <option value="nfl2020"> Temporada 20</option>
+                <option value="nfl2021"> Temporada 21</option>
+                <option value="nfl2022"> Temporada 22</option>
+            </select>
+        </div> -->
+        <br><br><br><br>
         <div class="flex">
             <select class="opciones-nf" name="Equipos1" id="Equipo 1">
                 <option value="">Elije el equipo Local</option>
@@ -28,6 +41,7 @@
                 {% endfor %}
             </select>
         </div>
+        <input type="hidden" name="años" value="{{ request.form.get('años') }}">
         <br><br><br>
         <div class="flex">
             <input class="boton-nf" type="submit" value="Buscar">

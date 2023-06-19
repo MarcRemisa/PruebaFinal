@@ -14,7 +14,7 @@
     <h1 class="portada-s flex">{{data.bienvenidaS1}}</h1>
     <br>
     <form action="{{ url_for('resultadosSerieA')}}" method="POST">
-        <div class="flex">
+        <!-- <div class="flex">
             <select class="opciones-s" name="años" id="año">
                 <option value=""> ELIJE TEMPORADA </option>
                 <option value="seriea2017"> Temporada 17</option>
@@ -24,7 +24,7 @@
                 <option value="seriea2021"> Temporada 21</option>
                 <option value="seriea2022"> Temporada 22</option>
             </select>
-        </div>
+        </div> -->
         <br><br><br><br>
         <div class="flex">
             <select class="opciones-s" name="Equipos1" id="Equipo 1">
@@ -40,6 +40,7 @@
                 {% endfor %}
             </select>
         </div>
+        <input type="hidden" name="años" value="{{ request.form.get('años') }}">
         <br><br><br>
         <div class="flex">
             <input class="boton-s" type="submit" value="Buscar">
